@@ -11,21 +11,7 @@ type MarkerType = {
   status: string,
 }
 
-const icon = divIcon({
-  className: "marker",
-  iconAnchor: [0, 24],
-  popupAnchor: [0, -36],
-  html: `<span />`
-});
-
-const selectedIcon = divIcon({
-  className: "marker selected",
-  iconAnchor: [0, 24],
-  popupAnchor: [0, -36],
-  html: `<span />`
-});
-
-export default function Map({markers, onSelect}: {markers: MarkerType[], onSelect: (id: string) => void}) {
+export default function MachineMap({markers, onSelect}: {markers: MarkerType[], onSelect: (id: string) => void}) {
 
   const onMarkerClick = (id: string) => {
     onSelect(id);

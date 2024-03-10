@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import './App.css';
-import ExampleData from './Map';
+import MachineMap from './components/MachineMap';
 import { useGetMachines } from './hooks/useGetMachines';
 import { LatLngExpression } from 'leaflet';
+import MachineSummary from './components/MachineSummary';
 
 function App() {
   const [ selectedMachineId, setSelectedMachineId ] = useState<string>()
@@ -30,28 +31,12 @@ function App() {
       <section>
         {!!selectedMachine && markers.length > 0 && (
           <aside>
-            <h3>Machine details</h3>
-            <dl>
-              <dt>id:</dt>
-              <dd>{selectedMachine.id}</dd>
-              <dt>install date:</dt>
-              <dd>{selectedMachine.install_date}</dd>
-              <dt>last maintenance:</dt>
-              <dd>{selectedMachine.last_maintenance}</dd>
-              <dt>type:</dt>
-              <dd>{selectedMachine.machine_type}</dd>
-              <dt>latitude:</dt>
-              <dd>{selectedMachine.latitude}</dd>
-              <dt>longitude:</dt>
-              <dd>{selectedMachine.longitude}</dd>
-              <dt>status:</dt>
-              <dd>{selectedMachine.status}</dd>
-            </dl>
+            <MachineSummary machine={selectedMachine} />
           </aside>
         )}
         <main>
           {markers.length > 0 && (
-            <ExampleData
+            <MachineMap
               markers={markers}
               onSelect={handleMachineSelect}
             />
