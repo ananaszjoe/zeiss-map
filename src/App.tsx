@@ -4,9 +4,12 @@ import MachineMap from './components/MachineMap';
 import { useGetMachines } from './hooks/useGetMachines';
 import { LatLngExpression } from 'leaflet';
 import MachineSummary from './components/MachineSummary';
+import { useGetMachineDetails } from './hooks/useGetMachineDetails';
+import MachineEvents from './components/MachineEvents';
 
 function App() {
-  const [ selectedMachineId, setSelectedMachineId ] = useState<string>()
+  const [ selectedMachineId, setSelectedMachineId ] = useState<string>();
+  const { machine: detailedMachine } = useGetMachineDetails(selectedMachineId);
   const { machines } = useGetMachines();
 
   const handleMachineSelect = (id: string) => {
@@ -32,6 +35,9 @@ function App() {
         {!!selectedMachine && markers.length > 0 && (
           <aside>
             <MachineSummary machine={selectedMachine} />
+            {detailedMachine && (
+              <MachineEvents events={detailedMachine.events} />
+            )}
           </aside>
         )}
         <main>

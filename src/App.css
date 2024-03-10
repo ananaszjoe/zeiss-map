@@ -84,6 +84,11 @@ main {
   background-color: red;
 }
 
+.repaired {
+  background-color: greenyellow;
+  color: black;
+}
+
 .selected {
   background-color: white;
   border: 2px solid black;
@@ -99,4 +104,23 @@ dt {
 
 dd {
   padding-left: 10px;
+}
+
+.event-list {
+  margin-top: 20px;
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+.event-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.event-list li span:first-child {
+  padding: 0 4px;
+  border-radius: 2px;
+  display: inline-block;
+  margin: 4px 0;
 }

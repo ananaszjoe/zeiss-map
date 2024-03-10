@@ -1,7 +1,6 @@
 export function robustFetch(url: string, abortSignal?: AbortSignal, retries: number = 3, timer: number = 300): Promise<any> {
   return fetch(url, {signal: abortSignal})
     .then(response => {
-      console.log('response', response);
       
       if(!response.ok) {
         if(response.status === 404 || response.status === 403) {
