@@ -1,28 +1,61 @@
 import { useState } from 'react';
 import './App.css';
+import ExampleData from './Map';
+import { useGetMachines } from './hooks/useGetMachines';
+import { LatLngExpression } from 'leaflet';
 
 function App() {
-  const [ machine, setMachine ] = useState<string>()
+  const [ selectedMachineId, setSelectedMachineId ] = useState<string>()
+  const { machines } = useGetMachines();
 
-  const x = () => {
-    setMachine('1');
+  const handleMachineSelect = (id: string) => {
+    setSelectedMachineId(id);
   }
 
+  const markers = machines.map(entry => ({
+    id: entry.id,
+    coords: [entry.latitude, entry.longitude] as LatLngExpression,
+    selected: selectedMachineId === entry.id,
+    status: entry.status
+  }));
+
+  const selectedMachine = machines.find(entry => entry.id === selectedMachineId);
+  
   return (
     <>
       <header>
         <h1>ZEISS MachineStream Machines</h1>
       </header>
-        <button onClick={x}>hello</button>
 
       <section>
-        {!!machine && (
+        {!!selectedMachine && markers.length > 0 && (
           <aside>
-            <p>Hippopotomonstrosesquippedaliophobia</p>
+            <h3>Machine details</h3>
+            <dl>
+              <dt>id:</dt>
+              <dd>{selectedMachine.id}</dd>
+              <dt>install date:</dt>
+              <dd>{selectedMachine.install_date}</dd>
+              <dt>last maintenance:</dt>
+              <dd>{selectedMachine.last_maintenance}</dd>
+              <dt>type:</dt>
+              <dd>{selectedMachine.machine_type}</dd>
+              <dt>latitude:</dt>
+              <dd>{selectedMachine.latitude}</dd>
+              <dt>longitude:</dt>
+              <dd>{selectedMachine.longitude}</dd>
+              <dt>status:</dt>
+              <dd>{selectedMachine.status}</dd>
+            </dl>
           </aside>
         )}
         <main>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi.</p>
+          {markers.length > 0 && (
+            <ExampleData
+              markers={markers}
+              onSelect={handleMachineSelect}
+            />
+          )}
         </main>
       </section>
     </>
