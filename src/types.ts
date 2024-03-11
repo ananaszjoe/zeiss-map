@@ -21,3 +21,10 @@ export type MachineEvent = {
 export type DetailedMachine = Machine & {
   events: MachineEvent[];
 };
+
+export type UniversalMachineEvent = {
+  id: string,
+  machine_id: string,
+  status: string,
+  timestamp: string,
+}

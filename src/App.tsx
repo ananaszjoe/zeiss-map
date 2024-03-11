@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import './App.css';
 import MachineMap from './components/MachineMap';
 import { useGetMachines } from './hooks/useGetMachines';
@@ -6,11 +6,13 @@ import { LatLngExpression } from 'leaflet';
 import MachineSummary from './components/MachineSummary';
 import { useGetMachineDetails } from './hooks/useGetMachineDetails';
 import MachineEvents from './components/MachineEvents';
+import { EventsContext, eventsContextType } from './eventsProvider';
 
 function App() {
   const [ selectedMachineId, setSelectedMachineId ] = useState<string>();
   const { machine: detailedMachine } = useGetMachineDetails(selectedMachineId);
   const { machines } = useGetMachines();
+  const { events } = useContext<eventsContextType>(EventsContext);
 
   const handleMachineSelect = (id: string) => {
     setSelectedMachineId(id);
@@ -24,6 +26,8 @@ function App() {
   }));
 
   const selectedMachine = machines.find(entry => entry.id === selectedMachineId);
+
+  const displayedEvents = !detailedMachine ? [] : [...events.slice().reverse().filter(event => event.machine_id === selectedMachineId), ...detailedMachine.events];
   
   return (
     <>
@@ -36,7 +40,7 @@ function App() {
           <aside>
             <MachineSummary machine={selectedMachine} />
             {detailedMachine && (
-              <MachineEvents events={detailedMachine.events} />
+              <MachineEvents events={displayedEvents} />
             )}
           </aside>
         )}
