@@ -1,30 +1,26 @@
-# React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## Hi @lanngoz!
+To test the app, clone the repository, then run:
 ```
+$ npm i
+$ npm run build
+$ npm run preview
+```
+Then open the localhost url provided by the CLI. To see a machine's summary, click on a marker on the displayed map!
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+As you can see, this is a really crude prototype and there is quite a list of parts missing that would be crucial in a production environment.
+These include, but are not limited to:
+
+- Unit testing of hooks, utilities, services, components
+- Secure environment variables via eg. github actions
+- API communication would ideally happen during SSR, eg. via Next.js getServerSideProps
+- Design and layout that accommodate better usability, accessability, mobile responsiveness
+- Loading and error state reflected in UI
+- Proper logging connected to eg. Sentry
+- Component styling encapsulation via eg. css modules + less
+- Meta html markup, eg. Favicon, title, SEO related configuration
+- Faster lint and format via eg. biome
+- CI/CD pipelines, test/build scripts, site deployed
+
+*I focused on getting the core functionality to work but of course I would gladly elaborate about any topics.*
+
+### Thank you for the exciting challenge, I enjoyed it!
