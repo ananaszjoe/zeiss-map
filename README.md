@@ -1,4 +1,4 @@
-## Hi @lanngoz!
+## Hi @boromo, @lanngoz!
 To test the app, clone the repository, then run:
 ```
 $ npm i
