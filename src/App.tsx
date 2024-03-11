@@ -22,7 +22,7 @@ function App() {
     id: entry.id,
     coords: [entry.latitude, entry.longitude] as LatLngExpression,
     selected: selectedMachineId === entry.id,
-    status: entry.status
+    status: events.slice().reverse().find(e => e.machine_id === entry.id)?.status || entry.status,
   }));
 
   const selectedMachine = machines.find(entry => entry.id === selectedMachineId);

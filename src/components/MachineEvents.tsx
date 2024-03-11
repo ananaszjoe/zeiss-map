@@ -9,7 +9,7 @@ export default function MachineEvents({events}: {events: MachineEvent[]}) {
       <h3>Recent events:</h3>
       <ul>
         {listData.map(entry => (
-          <li><span className={entry.status}>{entry.status}</span> - <span title={entry.timestamp}>{entry.humanTime}</span></li>
+          <li key={entry.timestamp}><span className={entry.status}>{entry.status}</span> - <span title={entry.timestamp}>{entry.humanTime}</span></li>
         ))}
       </ul>
     </div>
